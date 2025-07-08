@@ -12,13 +12,13 @@ class sampleTestCase(TestCase):
 class TaskModelTestCase(TestCase):
     def test_create_task1(self):
         due = timezone.make_aware(datetime(2024, 6, 30, 23, 59, 59))
-        task = Task(title = 'task1')
+        task = Task(title = 'task1', due_at=due)
         task.save()
 
         task = Task.objects.get(pk = task.pk)
         self.assertEqual(task.title, 'task1')
         self.assertFalse(task.completed)
-        self.assertEqual(task.due_at, None)
+        self.assertEqual(task.due_at, due)
 
     def test_create_task2(self):
         task = Task(title = 'task2')
